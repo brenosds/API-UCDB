@@ -17,5 +17,12 @@ module.exports = userControler = {
         const novoUser = new User(data);
         await novoUser.save().then((response) => console.log(response));
         return { status: 200 }
-    }
+    },
+    async geraToken(data) {
+        let email = data.email
+        var token = jwt.sign({ email }, 'secret', {
+            expiresIn: 300 // expires in 5min
+        })
+        return token
+    },
 }
